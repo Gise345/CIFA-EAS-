@@ -7,7 +7,7 @@ import { Feather } from '@expo/vector-icons';
 import Card from '../common/Card';
 import Section from '../common/Section';
 import { useTeams } from '../../../src/hooks/useTeams';
-import { Player } from '../../services/firebase/teams';
+import { Player } from '../../types/team'; 
 
 interface PlayerListProps {
   teamId: string;
