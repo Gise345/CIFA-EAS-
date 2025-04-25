@@ -36,6 +36,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "0a23c109-1553-4d20-be52-d4a20f08980e"
+      }
+    },
+    "owner": "cifa"
   }
 }
