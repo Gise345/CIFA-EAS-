@@ -1,74 +1,87 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+// CIFAMobileApp/app/(tabs)/index.tsx
+import React from 'react';
+import { ScrollView, StyleSheet, View, StatusBar } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
+import Header from '../../src/components/common/Header';
+import TeamUpdates from '../../src/components/home/TeamUpdates';
+import FeaturedMatch from '../../src/components/home/FeaturedMatch';
+import UpcomingFixtures from '../../src/components/home/upcomingFixtures';
+import LiveStreamButton from '../../src/components/home/LiveStreamButton';
+import MatchRecap from '../../src/components/home/MatchRecap';
+import NewsList from '../../src/components/home/NewsList';
+import { useRouter } from 'expo-router';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export default function LatestScreen() {
+  const router = useRouter();
+  
+  const handleLiveStreamPress = () => {
+    // This would open the live stream when implemented
+    console.log('Live stream button pressed');
+  };
+  
+  const handleMatchRecapPress = () => {
+    // This would open the match recap video player when implemented
+    console.log('Match recap pressed');
+  };
+  
+  const handleViewAllVideos = () => {
+    // This would navigate to the videos library when implemented
+    console.log('View all videos pressed');
+  };
+  
+  const handleViewAllNews = () => {
+    // Navigate to news page when implemented
+    console.log('View all news pressed');
+  };
 
-export default function HomeScreen() {
+  const handleViewAllFixtures = () => {
+    // Navigate to fixtures page when implemented
+    console.log('View all fixtures pressed');
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <LinearGradient
+      colors={[ '#E50914' ,'#0047AB', '#191970', '#041E42']}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={styles.container}
+    >
+      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
+      <SafeAreaView style={styles.safeArea}>
+        <Header title="CIFA" showNotification={true} showMenu={true} />
+        <ScrollView style={styles.scrollView}>
+          <TeamUpdates />
+          <MatchRecap 
+            
+            onViewAll={handleViewAllVideos}
+          />
+          <FeaturedMatch />
+          <LiveStreamButton onPress={handleLiveStreamPress} />
+          <UpcomingFixtures onViewAll={handleViewAllFixtures} />
+          
+          
+          <NewsList onViewAll={handleViewAllNews} />
+          
+          {/* Add padding at the bottom for better scrolling */}
+          <View style={styles.bottomPadding} />
+        </ScrollView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  safeArea: {
+    flex: 1,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  scrollView: {
+    flex: 1,
+  },
+  bottomPadding: {
+    height: 30,
   },
 });
